@@ -2,9 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
-const pool = require("./config/db");
-const { swaggerUi, specs } = require("./swagger");
-const authRoutes = require("./routes/authRoutes");
+const pool = require("./src/config/db");
+const { swaggerUi, specs } = require("./src/swagger");
+const authRoutes = require("./src/routes/authRoutes");
+const wasteRoutes = require("./src/routes/wasteRoutes");
 
 const app = express();
 
@@ -32,7 +33,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // Routes
 app.use("/api/auth", authRoutes);
-
+app.use("/api/waste", wasteRoutes);
 // Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
